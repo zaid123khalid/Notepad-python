@@ -37,7 +37,6 @@ def font_change():
             my_font.config(underline=1)
         if value == "Strike":
             my_font.config(overstrike=1)
-        print(value)
 
     font_size_label = ttk.Label(fonts_win, text="Font Size", font=("Helvetica", 15))
     font_size_label.grid(row=1, column=1, padx=5, pady=5)
@@ -130,6 +129,14 @@ def exit():
     Notepad.destroy()
 
 
+def Light():
+    txt.config(bg="light grey", fg="black")
+
+
+def Dark():
+    txt.config(bg="#505050", fg="#000000")
+
+
 def about():
     messagebox.showinfo("About Notepad", "Notepad, made by zaid123khalid")
 
@@ -141,15 +148,17 @@ Notepad.config(menu=Menubar)
 
 filemenu = Menu(Menubar, tearoff=0)
 editmenu = Menu(Menubar, tearoff=0)
+thememenu = Menu(Menubar, tearoff=0)
 Aboutmenu = Menu(Menubar, tearoff=0)
 
 Menubar.add_cascade(label="File", menu=filemenu)
 Menubar.add_cascade(label="Edit", menu=editmenu)
+Menubar.add_cascade(label="Theme", menu=thememenu)
 Menubar.add_cascade(label="About", menu=Aboutmenu)
 
 my_font = font.Font(family="Helvetica", size="10", weight="normal", slant="roman", underline=0, overstrike=0)
 
-txt = scrolledtext.ScrolledText(Notepad, font=my_font)
+txt = scrolledtext.ScrolledText(Notepad, font=my_font, bg="light grey", fg="black")
 txt.pack(expand=True, fill=BOTH)
 
 filemenu.add_command(label="New", command=newFile)
@@ -163,6 +172,9 @@ editmenu.add_command(label="Copy", command=copy)
 editmenu.add_command(label="Paste", command=paste)
 editmenu.add_separator()
 editmenu.add_command(label="Font", command=font_change)
+
+thememenu.add_command(label="Light", command=Light)
+thememenu.add_command(label="Dark", command=Dark)
 
 Aboutmenu.add_command(label="About Notepad", command=about)
 
